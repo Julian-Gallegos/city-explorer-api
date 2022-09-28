@@ -1,0 +1,25 @@
+{
+  "name": "city-explorer-api",
+  "version": "1.0.0",
+  "description": "Server back-end for City Explorer front-end app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Julian-Gallegos/city-explorer-api.git"
+  },
+  "author": "Julian Gallegos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Julian-Gallegos/city-explorer-api/issues"
+  },
+  "homepage": "https://github.com/Julian-Gallegos/city-explorer-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.20"
+  }
+}
