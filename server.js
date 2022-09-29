@@ -23,6 +23,8 @@ const data = require('./data/weather.json');
 // start our server
 const app = express();
 
+const axios = require('axios'); // TODO:
+
 // Middleware
 // The app.use() function is used to mount the specified middleware function(s) at the path which is being specified
 app.use(cors());
@@ -40,33 +42,38 @@ app.get('/', (req, res) => {
     res.send('Hello from the home route!');
 });
 
-app.get('/weather', (req, res) => {
-    let lat = req.query.lat;
-    let lon = req.query.lon;
-    let searchQuery = req.query.query;
-    let matchedQuery = data.find(item => item.city_name.toUpperCase() === searchQuery.toUpperCase());
-    if (!matchedQuery && matchedQuery.city_name !== 'Seattle' && matchedQuery.city_name !== 'Paris' && matchedQuery.city_name !== 'Amman') {
-        res.status(400).send('City Query Failed');
-    } else {
-        let forecastArray = [];
-        for(let i = 0; i < matchedQuery.data.length; i++) {
-            let date = matchedQuery.data[i].datetime;
-            let low = matchedQuery.data[i].low_temp;
-            let high = matchedQuery.data[i].high_temp;
-            let weather = matchedQuery.data[i].weather.description;
-            let description = `Low of ${low}, high of ${high} with ${weather}`;
-            forecastArray.push(new Forecast(date, description));
-        }
-        res.send(forecastArray);
-    }
-});
+app.get('/weather', getWeather);
 
-app.get('/Data', (req, res) => {
-    res.send(data[0].weather);
-})
+app.get('/movies', getMovies);
 
 // Catch all endpoint: make sure this is at the end of the endpoint checks, similar to a switch default case.
 
 app.get('*', (req, res) => {
     res.status(404).send('Page Not Found');
 });
+
+async function getWeather(req, res) {
+    //const searchQuery = req.query.query;
+    const lat = req.query.lat;
+    const lon = req.query.lon;
+    const url = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=${process.env.WEATHER_API_KEY}`;
+    try {
+        const weatherResponse = await axios.get(url);
+        let forecastArray = weatherResponse.data.data.map(obj => {
+            let date = obj.datetime;
+            let low = obj.min_temp;
+            let high = obj.max_temp;
+            let weather = obj.weather.description;
+            let description = `Low of ${low}, high of ${high} with ${weather}`;
+            return new Forecast(date, description);
+        });
+        res.status(200).send(forecastArray);
+    } catch (error) {
+        res.status(500).send(`server error ${error}`)
+    }
+}
+
+async function getMovies(req, res) {
+
+
+}
