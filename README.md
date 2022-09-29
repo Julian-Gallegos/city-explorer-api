@@ -94,8 +94,8 @@ Name of feature: Publish
 
 Estimate of time needed to complete: 30 minutes
 
-Start time:  7:11pm
+Start time:  7:10pm
 
-Finish time: 
+Finish time: 8:00
 
-Actual time needed to complete: 
+Actual time needed to complete: 50 minutes
