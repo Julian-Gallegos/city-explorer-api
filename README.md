@@ -21,7 +21,11 @@ Back-end server for City Explorer front-end app. Provides weather data.
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-![Client-Server Dataflow](DataFlowDiagram.png)
+![Client-Server Dataflow1](request-response-cycle.png)
+
+![Client-Server Dataflow2](DataFlowDiagram.png)
+
+![Client-Server Dataflow3](Lab%208%20diagram.png)
 
 ## Time Sheets lab 7
 
