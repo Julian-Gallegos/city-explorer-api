@@ -82,19 +82,19 @@ Name of feature: Movies
 
 Estimate of time needed to complete: 40 minutes
 
-Start time: 5:35pm
+Start time: 6:00pm
 
-Finish time: 
+Finish time: 7:10pm
 
-Actual time needed to complete: 
+Actual time needed to complete: 70 minutes
 
 ### Feature 8-3
 
-Name of feature: 
+Name of feature: Publish
 
-Estimate of time needed to complete: 
+Estimate of time needed to complete: 30 minutes
 
-Start time: 
+Start time:  7:11pm
 
 Finish time: 
 
