@@ -95,7 +95,6 @@ async function getMovies(req, res) {
             let result = movieResponse.data.results[i];
             moviesArray.push(new Movie(result.original_title, result.overview, result.vote_average, result.vote_count, 'https://image.tmdb.org/t/p/w500'+result.poster_path, result.popularity, result.release_date));
         }
-        console.log(moviesArray);
         res.status(200).send(moviesArray);
     } catch (error) {
         res.status(500).send(`server error ${error}`);
