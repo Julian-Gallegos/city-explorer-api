@@ -9,6 +9,18 @@ class Forecast {
     }
 }
 
+class Movie {
+    constructor(title, overview, average_votes, total_votes, image_url, popularity, released_on) {
+        this.title = title;
+        this.overview = overview;
+        this.average_votes = average_votes;
+        this.total_votes = total_votes;
+        this.image_url = image_url;
+        this.popularity = popularity;
+        this.released_on = released_on;
+    }
+}
+
 
 /* Like import, but it takes an external module,
    and does not need to be at the top of file,
@@ -22,6 +34,8 @@ const cors = require('cors');
 const data = require('./data/weather.json');
 // start our server
 const app = express();
+
+const axios = require('axios'); // TODO:
 
 // Middleware
 // The app.use() function is used to mount the specified middleware function(s) at the path which is being specified
@@ -40,33 +54,50 @@ app.get('/', (req, res) => {
     res.send('Hello from the home route!');
 });
 
-app.get('/weather', (req, res) => {
-    let lat = req.query.lat;
-    let lon = req.query.lon;
-    let searchQuery = req.query.query;
-    let matchedQuery = data.find(item => item.city_name.toUpperCase() === searchQuery.toUpperCase());
-    if (!matchedQuery && matchedQuery.city_name !== 'Seattle' && matchedQuery.city_name !== 'Paris' && matchedQuery.city_name !== 'Amman') {
-        res.status(400).send('City Query Failed');
-    } else {
-        let forecastArray = [];
-        for(let i = 0; i < matchedQuery.data.length; i++) {
-            let date = matchedQuery.data[i].datetime;
-            let low = matchedQuery.data[i].low_temp;
-            let high = matchedQuery.data[i].high_temp;
-            let weather = matchedQuery.data[i].weather.description;
-            let description = `Low of ${low}, high of ${high} with ${weather}`;
-            forecastArray.push(new Forecast(date, description));
-        }
-        res.send(forecastArray);
-    }
-});
+app.get('/weather', getWeather);
 
-app.get('/Data', (req, res) => {
-    res.send(data[0].weather);
-})
+app.get('/movies', getMovies);
 
 // Catch all endpoint: make sure this is at the end of the endpoint checks, similar to a switch default case.
 
 app.get('*', (req, res) => {
     res.status(404).send('Page Not Found');
 });
+
+async function getWeather(req, res) {
+    //const searchQuery = req.query.query;
+    const lat = req.query.lat;
+    const lon = req.query.lon;
+    const url = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=${process.env.WEATHER_API_KEY}`;
+    try {
+        const weatherResponse = await axios.get(url);
+        let forecastArray = weatherResponse.data.data.map(obj => {
+            let date = obj.datetime;
+            let low = obj.min_temp;
+            let high = obj.max_temp;
+            let weather = obj.weather.description;
+            let description = `Low of ${low}, high of ${high} with ${weather}`;
+            return new Forecast(date, description);
+        });
+        res.status(200).send(forecastArray);
+    } catch (error) {
+        res.status(500).send(`server error ${error}`)
+    }
+}
+
+async function getMovies(req, res) {
+    const searchQuery = req.query.query;
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchQuery}`;
+    try {
+        const movieResponse = await axios.get(url);
+        let moviesArray = [];
+        for (let i = 0; i < movieResponse.data.results.length || i < 20; i++) {
+            let result = movieResponse.data.results[i];
+            moviesArray.push(new Movie(result.original_title, result.overview, result.vote_average, result.vote_count, 'https://image.tmdb.org/t/p/w500'+result.poster_path, result.popularity, result.release_date));
+        }
+        res.status(200).send(moviesArray);
+    } catch (error) {
+        res.status(500).send(`server error ${error}`);
+    }
+
+}
