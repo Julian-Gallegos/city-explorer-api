@@ -1,6 +1,6 @@
 'use strict';
 
-import { get } from 'axios';
+const axios = require('axios');
 
 async function getWeather(req, res) {
     //const searchQuery = req.query.query;
@@ -8,7 +8,7 @@ async function getWeather(req, res) {
     const lon = req.query.lon;
     const url = `https://api.weatherbit.io/v2.0/forecast/daily?lat=${lat}&lon=${lon}&key=${process.env.WEATHER_API_KEY}`;
     try {
-        const weatherResponse = await get(url);
+        const weatherResponse = await axios.get(url);
         let forecastArray = weatherResponse.data.data.map(obj => {
             let date = obj.datetime;
             let low = obj.min_temp;
@@ -31,4 +31,4 @@ class Forecast {
 }
 
 // Node export syntax:
-module.exports = {getWeather};
+module.exports = getWeather;
