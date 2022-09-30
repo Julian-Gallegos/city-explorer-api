@@ -16,7 +16,7 @@ const data = require('./data/weather.json');
 const app = express();
 const axios = require('axios');
 const getWeather = require('./modules/getWeather');
-const getMovies = require('./modules/getMovies').default;
+const getMovies = require('./modules/getMovies');
 
 // Middleware
 // The app.use() function is used to mount the specified middleware function(s) at the path which is being specified

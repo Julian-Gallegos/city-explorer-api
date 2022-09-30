@@ -1,12 +1,12 @@
 'use strict';
 
-import { get } from 'axios';
+const axios = require('axios');
 
 async function getMovies(req, res) {
     const searchQuery = req.query.query;
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.MOVIE_API_KEY}&query=${searchQuery}`;
     try {
-        const movieResponse = await get(url);
+        const movieResponse = await axios.get(url);
         let moviesArray = [];
         for (let i = 0; i < movieResponse.data.results.length || i < 20; i++) {
             let result = movieResponse.data.results[i];
@@ -30,4 +30,4 @@ class Movie {
     }
 }
 
-export default {getMovies};
+module.exports = getMovies;
