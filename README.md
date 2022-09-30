@@ -21,11 +21,13 @@ Back-end server for City Explorer front-end app. Provides weather data.
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-![Client-Server Dataflow1](request-response-cycle.png)
+![Client-Server Dataflow1](./diagrams/request-response-cycle.png)
 
-![Client-Server Dataflow2](DataFlowDiagram.png)
+![Client-Server Dataflow2](./diagrams/DataFlowDiagram.png)
 
-![Client-Server Dataflow3](Lab%208%20diagram.png)
+![Client-Server Dataflow3](./diagrams/Lab%208%20diagram.png)
+
+![Client-Server Dataflow4](./diagrams/Lab%2010%20diagram.png)
 
 ## Time Sheets lab 7
 
@@ -128,3 +130,17 @@ Start time: 11:30am
 Finish time: 12:00pm
 
 Actual time needed to complete: 30 minutes
+
+## Time Sheets lab 10
+
+### Feature 10-1
+
+Name of feature: Performance
+
+Estimate of time needed to complete: 35 minutes
+
+Start time: 3:40pm
+
+Finish time: 4:13pm
+
+Actual time needed to complete: 33 minutes

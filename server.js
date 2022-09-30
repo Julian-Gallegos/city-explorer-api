@@ -10,11 +10,8 @@ require('dotenv').config();
 const express = require('express');
 // Allows for Cross Origin Resources Sharing
 const cors = require('cors');
-// load data
-const data = require('./data/weather.json');
 // start our server
 const app = express();
-const axios = require('axios');
 const getWeather = require('./modules/getWeather');
 const getMovies = require('./modules/getMovies');
 
