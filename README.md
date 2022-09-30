@@ -65,7 +65,6 @@ Finish time: 12:55am
 
 Actual time needed to complete: 5 minutes
 
-
 ## Time Sheets lab 8
 
 ### Feature 8-1
@@ -103,3 +102,29 @@ Start time:  7:10pm
 Finish time: 8:00
 
 Actual time needed to complete: 50 minutes
+
+## Time Sheets lab 9
+
+### Feature 9-1
+
+Name of feature: Refactor Back-End
+
+Estimate of time needed to complete: 20 minutes
+
+Start time: 11:20am
+
+Finish time: 7:00pm
+
+Actual time needed to complete: 10 minutes
+
+### Feature 9-2
+
+Name of feature: Refactor Front-End
+
+Estimate of time needed to complete: 30 minutes
+
+Start time: 11:30am
+
+Finish time: 12:00pm
+
+Actual time needed to complete: 30 minutes
